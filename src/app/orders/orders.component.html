@@ -1,0 +1,100 @@
+<div class="container-fluid">
+  <div class="row mar-top-first">
+    <div class="col-md-12">
+      <h4 class="main-heading">Orders</h4>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+<!--      <table class="order-table">-->
+<!--        <thead>-->
+<!--          <tr>-->
+<!--            <td>Order Date</td>-->
+<!--            <td>Order Name</td>-->
+<!--            <td>Order Status</td>-->
+<!--            <td>Quantity</td>-->
+<!--            <td>Payment</td>-->
+<!--          </tr>-->
+<!--        </thead>-->
+<!--        <tbody>-->
+<!--          <tr>-->
+<!--            <td>02 May 2019</td>-->
+<!--            <td>St. Glass</td>-->
+<!--            <td><span class="inp">In Process</span></td>-->
+<!--            <td>2135k</td>-->
+<!--            <td>$ 235</td>-->
+<!--          </tr>-->
+<!--          <tr>-->
+<!--            <td>02 May 2019</td>-->
+<!--            <td>St. Glass</td>-->
+<!--            <td><span class="pend">Pending</span></td>-->
+<!--            <td>2135k</td>-->
+<!--            <td>$ 235</td>-->
+<!--          </tr>-->
+<!--          <tr>-->
+<!--            <td>02 May 2019</td>-->
+<!--            <td>St. Glass</td>-->
+<!--            <td><span class="comp">Completed</span></td>-->
+<!--            <td>2135k</td>-->
+<!--            <td>$ 235</td>-->
+<!--          </tr>-->
+<!--        </tbody>-->
+<!--      </table>-->
+    </div>
+  </div>
+
+  <div id="accordion">
+    <div class="card" *ngFor="let orders of getOrdersRes?.response; let i = index">
+      <div class="card-header">
+        <a class="card-link" data-toggle="collapse" href="#order-{{i}}">
+          {{orders?.location}}
+        </a>
+
+        <div class="btn-group">
+<!--          <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-->
+<!--            Right-aligned menu-->
+<!--          </button>-->
+          <i class="fas fa-ellipsis-h" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
+          <div class="dropdown-menu dropdown-menu-right">
+            <button class="dropdown-item" type="button" (click)="updateOrderFunc('pending', orders?.id)">Pending</button>
+            <button class="dropdown-item" type="button" (click)="updateOrderFunc('completed', orders?.id)">Complete</button>
+            <button class="dropdown-item alert-danger" type="button" (click)="updateOrderFunc('cancelled', orders?.id)">Cancel</button>
+          </div>
+        </div>
+        <span class="badge badge-info pl-2 pr-2 pt-1 pb-1 f-12 float-right">{{orders?.items[0]?.status}}</span>
+      </div>
+      <div id="order-{{i}}" class="collapse" data-parent="#accordion" [ngClass]="{'show': i == 0}">
+        <div class="card-body">
+          <table class="order-table" *ngIf="orders?.items?.length > 0">
+            <thead>
+              <tr>
+                <td>Order Date</td>
+                <td>Order Name</td>
+<!--                <td>Order Status</td>-->
+                <td>Quantity</td>
+                <td>Payment</td>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let items of orders?.items">
+                <td>{{items?.datetime | date: 'MMM d, y'}}</td>
+                <td>{{items?.item_name}}</td>
+<!--                <td>-->
+<!--                  <span class="pend" *ngIf="items?.status == 'pending'">Pending</span>-->
+<!--                  <span class="inp" *ngIf="items?.status == 'inprogress'">In Progress</span>-->
+<!--                  <span class="comp" *ngIf="items?.status == 'completed'">Completed</span>-->
+<!--                </td>-->
+                <td>{{items?.quantity}}</td>
+                <td>{{items?.price}}</td>
+              </tr>
+            </tbody>
+          </table>
+          <span class="text-center d-block" *ngIf="orders?.items?.length <= 0">
+            No Items Found!
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

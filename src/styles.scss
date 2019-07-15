@@ -1,1 +1,207 @@
 /* You can add global styles to this file, and also import other style files */
+
+$primary: 'Montserrat', Arial, sans-serif;
+
+html, body {
+  font-family: $primary;
+  font-size: 16px;
+  line-height: 19px;
+  scroll-behavior: smooth;
+  margin: 0;
+  padding: 0;
+}
+
+h1,h2,h3,h4,h5,h6{
+  margin: 0;
+  padding: 0;
+  font-weight: 600;
+}
+
+button:focus{
+  outline: 0!important;
+  box-shadow: none!important;
+}
+
+button:active{
+  outline: 0;
+  box-shadow: none;
+}
+input {
+  font-size: 14px;
+  line-height: 17px;
+}
+input:focus{
+  outline: 0!important;
+  box-shadow: none!important;
+}
+
+.header{
+  background: #fff;
+  position: fixed;
+  left: 220px;
+  right: 0;
+  padding: 15px;
+  border-bottom: 1px solid #f5f5f5;
+  z-index: 1;
+}
+
+.adm{
+  border: 1px solid #f1f1f1;
+  background: #f5f5f5;
+  color: #2e91d7;
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  text-align: center;
+}
+
+.admin{
+  font-size: 12px;
+  margin-left: 5px;
+  color: #030303;
+}
+
+.sidebar-holder {
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 220px;
+  background-image: -webkit-linear-gradient( 90deg, #262626 0%, #363636 100%);
+}
+
+.side-nav {
+  border-right: 1px solid #292929;
+}
+
+.side-li {
+  padding: 0;
+  li {
+    list-style: none;
+    display: block;
+    margin: 0 0 2px;
+    a {
+      padding: 15px;
+      display: block;
+      //width: calc(100% + 7px);
+      color: #fff;
+      &:hover,
+      &.active {
+        background: #6d7880;
+        text-decoration: none;
+      }
+    }
+  }
+}
+
+.mar-top-first{
+  margin-top: 96px;
+}
+
+.main-heading{
+  font-size: 20px;
+  letter-spacing: 0.5px;
+  text-transform: capitalize;
+  margin: 0 0 20px;
+}
+
+.order-table th {
+  padding: 15px;
+  color: #000;
+  background: #f5f5f5;
+}
+
+.order-table {
+  margin-top: 20px;
+  width: 100%;
+  tbody {
+    font-size: 14px;
+    line-height: 17px;
+  }
+}
+
+.order-table td{
+  padding: 15px;
+  vertical-align: middle;
+  border-bottom: 1px solid #ededed;
+  border-left: 1px solid #ededed;
+}
+
+.order-table td:last-child{
+  padding: 15px;
+  vertical-align: middle;
+  border-bottom: 1px solid #ededed;
+  border-left: 1px solid #ededed;
+  border-right: 1px solid #ededed;
+}
+
+.order-date{
+  background: #fff;
+  box-shadow: 1px 1px 15px 1px #d3caca59;
+  color: #282929;
+  padding: 10px;
+}
+
+.inp{
+  background: #e2ebe6;
+  padding: 10px;
+  color: #32c032;
+}
+
+.pend{
+  background: #fff4cd;
+  padding: 10px;
+  color: #f5b90f;
+}
+
+.comp{
+  background: #e0f8ff;
+  /* box-shadow: 1px 1px 15px 1px #d3caca59; */
+  padding: 10px;
+  color: #61aaf5;
+}
+
+.alert-form {
+  font-size: 11px;
+  line-height: 14px;
+  font-weight: 700;
+  //background: #f2edda;
+  padding: 4px;
+  margin: 3px 0 0;
+  //animation: 0.35s alertAnim forwards;
+  color: #f80000;
+  text-align: right;
+  display: block;
+}
+
+.right-content {
+  overflow: hidden;
+  margin-left: 220px;
+}
+
+#accordion {
+  .card-header {
+    .badge {
+      margin: 0 10px 0 0;
+    }
+  }
+  .btn-group {
+    float: right;
+    .dropdown-item {
+      font-size: 12px;
+    }
+    .fas {
+      cursor: pointer;
+      padding: 0 3px;
+      &:hover {
+        color: lighten(#212529, 20);
+      }
+    }
+  }
+}
+
+.f-12 {
+  font-size: 12px;
+  line-height: 15px;
+}

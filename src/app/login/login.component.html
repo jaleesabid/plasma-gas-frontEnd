@@ -1,0 +1,28 @@
+<section class="login-sec">
+  <div class="login-box">
+    <div class="heading">
+      <h4>Admin Login</h4>
+    </div>
+    <div class="feilds" [formGroup]="loginForm">
+      <div class="form-group">
+        <label for="">Username/Email</label>
+        <input type="text" class="input-login" placeholder="Username / Email" formControlName="email" />
+        <div *ngIf="loginForm.controls['email'].touched && !loginForm.controls['email'].valid">
+          <span class="alert-form" *ngIf="loginForm.controls['email'].hasError('required')">Email is required</span>
+          <span class="alert-form" *ngIf="loginForm.controls['email'].hasError('pattern')">Email must be valid</span>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="">Password</label>
+        <input type="password" class="input-login" placeholder="Password" formControlName="password" />
+        <div *ngIf="loginForm.controls['password'].touched && !loginForm.controls['password'].valid">
+          <span class="alert-form" *ngIf="loginForm.controls['password'].hasError('required')">Password is required</span>
+          <span class="alert-form" *ngIf="loginForm.controls['password'].hasError('minlength')">At least 6 characters</span>
+        </div>
+      </div>
+      <div class="form-group">
+        <button type="submit" class="btn btn-login" (click)="loginFunc(loginForm.value)" [disabled]="!loginForm.valid">Login</button>
+      </div>
+    </div>
+  </div>
+</section>
