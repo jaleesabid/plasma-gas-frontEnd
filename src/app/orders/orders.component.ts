@@ -15,6 +15,8 @@ export class OrdersComponent implements OnInit {
   lat: number;
   lng: number;
 
+  locations = [];
+
   constructor(private service: MainServiceService) { }
 
   ngOnInit() {
@@ -22,12 +24,16 @@ export class OrdersComponent implements OnInit {
   }
 
   getOrdersFunc(): void {
+    this.locations.length = 0;
     this.service.getOrders().subscribe(res => {
       this.getOrdersRes = res;
       // this.lat = this.getOrdersRes.response[0].latitude;
       // this.lng = this.getOrdersRes.response[0].longitude;
       console.log('Get Orders Res: ', this.getOrdersRes);
       if (this.getOrdersRes.statusCode == 200) {
+        // this.getOrdersRes.response.forEach(item => {
+        //
+        // });
         this.getLocation();
       }
     });
