@@ -4,6 +4,7 @@ import {LoginComponent} from './login/login.component';
 import {AuthComponent} from './_layouts/auth/auth.component';
 import {AdminComponent} from './_layouts/admin/admin.component';
 import {OrdersComponent} from './orders/orders.component';
+import {FilterComponent} from './filter/filter.component';
 
 const routes: Routes = [
 
@@ -15,9 +16,10 @@ const routes: Routes = [
     ]
   },
   {
-    path: 'orders', component: AdminComponent,
+    path: '', component: AdminComponent,
     children: [
-      {path: '', component: OrdersComponent}
+      {path: 'orders', component: OrdersComponent},
+      {path: 'filter', component: FilterComponent}
     ]
   },
 ];

@@ -46,7 +46,7 @@
   <agm-map [latitude]="lat" [longitude]="lng" [zoom]="10">
 <!--    <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>-->
     <agm-marker
-      *ngFor="let m of getOrdersRes?.response; let i = index"
+      *ngFor="let m of locations; let i = index"
       [latitude]="m?.latitude"
       [longitude]="m?.longitude">
 

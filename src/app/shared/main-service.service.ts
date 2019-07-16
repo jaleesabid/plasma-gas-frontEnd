@@ -36,4 +36,12 @@ export class MainServiceService {
     }, {headers});
   }
 
+  filterOrders(from, to) {
+    const headers = new HttpHeaders();
+    headers.append('Content-Type', 'application/json');
+
+    return this.http.get(environment.baseUrl + 'admin/orderDetailfromto?startDate=' + from + '&endDate=' + to + '',
+      {headers});
+  }
+
 }

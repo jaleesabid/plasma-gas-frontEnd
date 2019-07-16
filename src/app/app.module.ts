@@ -14,6 +14,7 @@ import { AuthComponent } from './_layouts/auth/auth.component';
 import { AdminComponent } from './_layouts/admin/admin.component';
 
 import { AgmCoreModule } from '@agm/core';
+import { FilterComponent } from './filter/filter.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { AgmCoreModule } from '@agm/core';
     HeaderComponent,
     FooterComponent,
     AuthComponent,
-    AdminComponent
+    AdminComponent,
+    FilterComponent
   ],
   imports: [
     BrowserModule,
