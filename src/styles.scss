@@ -181,6 +181,7 @@ input:focus{
 }
 
 #accordion {
+  //margin: 50px 0 0;
   .card-header {
     .badge {
       margin: 0 10px 0 0;
@@ -204,4 +205,9 @@ input:focus{
 .f-12 {
   font-size: 12px;
   line-height: 15px;
+}
+
+agm-map {
+  height: 400px;
+  width: 100%;
 }

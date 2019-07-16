@@ -13,6 +13,8 @@ import { FooterComponent } from './shared/footer/footer.component';
 import { AuthComponent } from './_layouts/auth/auth.component';
 import { AdminComponent } from './_layouts/admin/admin.component';
 
+import { AgmCoreModule } from '@agm/core';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -28,7 +30,10 @@ import { AdminComponent } from './_layouts/admin/admin.component';
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyCn1Glzx53ZKTwNMJSZjIoy09W4tlfChPM'
+    })
   ],
   providers: [
     HttpClient

@@ -1,7 +1,7 @@
 <div class="container-fluid">
   <div class="row mar-top-first">
     <div class="col-md-12">
-      <h4 class="main-heading">Orders</h4>
+      <h4 class="main-heading">Orders Locations</h4>
     </div>
   </div>
   <div class="row">
@@ -43,6 +43,26 @@
     </div>
   </div>
 
+  <agm-map [latitude]="lat" [longitude]="lng" [zoom]="10">
+<!--    <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>-->
+    <agm-marker
+      *ngFor="let m of getOrdersRes?.response; let i = index"
+      [latitude]="m?.latitude"
+      [longitude]="m?.longitude">
+
+      <agm-info-window>
+        <strong>{{m?.location}}</strong>
+      </agm-info-window>
+
+    </agm-marker>
+  </agm-map>
+
+  <div class="row mar-top-first">
+    <div class="col-md-12">
+      <h4 class="main-heading">Orders Detail</h4>
+    </div>
+  </div>
+
   <div id="accordion">
     <div class="card" *ngFor="let orders of getOrdersRes?.response; let i = index">
       <div class="card-header">
@@ -61,7 +81,7 @@
             <button class="dropdown-item alert-danger" type="button" (click)="updateOrderFunc('cancelled', orders?.id)">Cancel</button>
           </div>
         </div>
-        <span class="badge badge-info pl-2 pr-2 pt-1 pb-1 f-12 float-right">{{orders?.items[0]?.status}}</span>
+        <span class="badge badge-info pl-2 pr-2 pt-1 pb-1 f-12 float-right">{{orders?.items[0]?.status | titlecase}}</span>
       </div>
       <div id="order-{{i}}" class="collapse" data-parent="#accordion" [ngClass]="{'show': i == 0}">
         <div class="card-body">

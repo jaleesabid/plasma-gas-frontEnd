@@ -11,6 +11,10 @@ export class OrdersComponent implements OnInit {
   getOrdersRes: any;
   updateOrderRes: any;
 
+  title: string = 'My first AGM project';
+  lat: number;
+  lng: number;
+
   constructor(private service: MainServiceService) { }
 
   ngOnInit() {
@@ -20,7 +24,12 @@ export class OrdersComponent implements OnInit {
   getOrdersFunc(): void {
     this.service.getOrders().subscribe(res => {
       this.getOrdersRes = res;
-      console.log('Get Orders Res: ', this.getOrdersRes)
+      // this.lat = this.getOrdersRes.response[0].latitude;
+      // this.lng = this.getOrdersRes.response[0].longitude;
+      console.log('Get Orders Res: ', this.getOrdersRes);
+      if (this.getOrdersRes.statusCode == 200) {
+        this.getLocation();
+      }
     });
   }
 
@@ -29,9 +38,23 @@ export class OrdersComponent implements OnInit {
       console.log('Update Order Res: ', res);
       this.updateOrderRes = res;
       if (this.updateOrderRes.statusCode == 200) {
-        this.getOrdersFunc()
+        this.getOrdersFunc();
       }
-    })
+    });
+  }
+
+  getLocation() {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition((pos) => this.showPosition(pos));
+    } else {
+      console.log('Geolocation is not supported by this browser.');
+    }
+  }
+
+  showPosition(position) {
+    console.log('Lat: ', position.coords.latitude, 'Long: ', position.coords.longitude);
+    this.lat = position.coords.latitude;
+    this.lng = position.coords.longitude;
   }
 
 }
