@@ -51,9 +51,8 @@
       [longitude]="m?.longitude">
 
       <agm-info-window>
-        <strong>{{m?.location}}</strong>
+        <strong>{{m?.order_id + '. ' + m?.location}}</strong>
       </agm-info-window>
-
     </agm-marker>
   </agm-map>
 
@@ -66,14 +65,11 @@
   <div id="accordion">
     <div class="card" *ngFor="let orders of getOrdersRes?.response; let i = index">
       <div class="card-header">
-        <a class="card-link" data-toggle="collapse" href="#order-{{i}}">
-          {{orders?.location}}
+        <a class="card-link" data-toggle="collapse" href="#order-{{i}}" (click)="moveToLocation(orders?.latitude, orders?.longitude)">
+          {{orders?.id + '. ' + orders?.location}}
         </a>
 
         <div class="btn-group">
-<!--          <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-->
-<!--            Right-aligned menu-->
-<!--          </button>-->
           <i class="fas fa-ellipsis-h" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
           <div class="dropdown-menu dropdown-menu-right">
             <button class="dropdown-item" type="button" (click)="updateOrderFunc('pending', orders?.id)">Pending</button>
@@ -82,6 +78,7 @@
           </div>
         </div>
         <span class="badge badge-info pl-2 pr-2 pt-1 pb-1 f-12 float-right">{{orders?.items[0]?.status | titlecase}}</span>
+        <span class="mr-2" style="float:right;font-size:12px;line-height:23px">Total Price: <strong>{{orders?.order_price}}</strong></span>
       </div>
       <div id="order-{{i}}" class="collapse" data-parent="#accordion" [ngClass]="{'show': i == 0}">
         <div class="card-body">

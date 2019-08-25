@@ -10,6 +10,7 @@ export class OrdersComponent implements OnInit, AfterContentInit {
 
   getOrdersRes: any;
   updateOrderRes: any;
+  orderPrice = [];
 
   title: string = 'My first AGM project';
   lat: number;
@@ -56,17 +57,38 @@ export class OrdersComponent implements OnInit, AfterContentInit {
       // this.lng = this.getOrdersRes.response[0].longitude;
       console.log('Get Orders Res: ', this.getOrdersRes);
       if (this.getOrdersRes.statusCode == 200) {
-        this.getOrdersRes.response.forEach(item => {
-          if (item.items.length > 0) {
-            if (item.items[0].status == 'pending') {
+
+        const orders = this.getOrdersRes.response;
+        let multipliedPrice;
+        for (let i = 0; i < orders.length; i++) {
+          multipliedPrice = 0;
+          if (orders[i].items.length > 0) {
+            if (orders[i].items[0].status == 'pending') {
               this.locations.push({
-                latitude: parseFloat(item.latitude),
-                longitude: parseFloat(item.longitude),
-                location: item.location
+                latitude: parseFloat(orders[i].latitude),
+                longitude: parseFloat(orders[i].longitude),
+                location: orders[i].location,
+                order_id: orders[i].id
               });
             }
           }
-        });
+
+          // console.log('Order Detail', orders[i]);
+          if (orders[i].items.length <= 0) {
+            console.log('Order without items: ');
+            orders[i].order_price = 0;
+          } else {
+
+            for (let j = 0; j < orders[i].items.length; j++) {
+              console.log('item price: ', orders[i].items[j].price, 'Items array Length: ', orders[i].items.length);
+              multipliedPrice += orders[i].items[j].price * orders[i].items[j].quantity;
+            }
+
+            orders[i].order_price = multipliedPrice;
+          }
+          console.log('Total price array: ', orders);
+        }
+
         console.log('Pending Orders: ', this.locations);
         this.getLocation();
       }
@@ -96,5 +118,12 @@ export class OrdersComponent implements OnInit, AfterContentInit {
     this.lat = position.coords.latitude;
     this.lng = position.coords.longitude;
   }
+
+  moveToLocation(lat, long): void {
+    this.lat = Number(lat);
+    this.lng = Number(long);
+    console.log('current lat long: ', this.lat, this.lng);
+  }
+
 
 }

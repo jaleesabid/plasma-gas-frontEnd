@@ -13,6 +13,7 @@ export class FilterComponent implements OnInit {
 
   getOrdersRes: any;
   filterRes;
+  completeOrders = []; cancelOrders = []; pendingOrders = [];
 
   constructor(private service: MainServiceService) {
     this.filterForm = new FormGroup({
@@ -30,7 +31,17 @@ export class FilterComponent implements OnInit {
       this.getOrdersRes = res;
       console.log('Get Orders Res: ', this.getOrdersRes);
       if (this.getOrdersRes.statusCode == 200) {
-
+        this.completeOrders.length = 0; this.pendingOrders.length = 0; this.cancelOrders.length = 0;
+        this.getOrdersRes.response.forEach(order => {
+          if (order.items[0].status == 'completed') {
+            this.completeOrders.push(order);
+          } else if (order.items[0].status == 'cancelled') {
+            this.cancelOrders.push(order);
+          } else if (order.items[0].status == 'pending') {
+            this.pendingOrders.push(order);
+          }
+        });
+        console.log('complete orders: ', this.completeOrders, 'Cancel Orders: ', this.cancelOrders, 'pending: ', this.pendingOrders);
       }
     });
   }
@@ -44,6 +55,10 @@ export class FilterComponent implements OnInit {
         this.getOrdersRes = this.filterRes;
       }
     });
+  }
+
+  filterOnState() {
+
   }
 
 }
